@@ -1,19 +1,36 @@
-// pages/LoginPage.js
+// pages/SignupPage.js
 import React, { useState } from 'react';
+import axios from 'axios';
 import bg from '../assets/bg.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Logging in with:', form);
+    setError('');
+    setSuccess('');
+
+    try {
+      await axios.post('http://localhost:5001/api/auth/register', {
+        ...form,
+        role: 'user'
+      });
+
+      setSuccess('Signup successful!');
+      setTimeout(() => navigate('/login'), 1500);
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.error || 'Signup failed');
+    }
   };
 
   return (
@@ -26,20 +43,23 @@ const Signup = () => {
       <div className="bg-white p-5 rounded shadow" style={{ maxWidth: '400px', width: '100%' }}>
         <h3 className="text-center mb-4 text-warning">Sign Up</h3>
         <form onSubmit={handleSubmit}>
+          {error && <div className="alert alert-danger">{error}</div>}
+          {success && <div className="alert alert-success">{success}</div>}
+
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">Username</label>
+            <label htmlFor="name" className="form-label">Username</label>
             <input
               type="text"
-              name="username"
+              name="name"
               className="form-control"
-              id="username"
+              id="name"
               placeholder="Enter Username"
-              value={form.email}
+              value={form.name}
               onChange={handleChange}
               required
             />
           </div>
-           <div className="mb-3">
+          <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
             <input
               type="email"
@@ -66,7 +86,7 @@ const Signup = () => {
             />
           </div>
           <button type="submit" className="btn btn-warning w-100 text-white fw-bold">Signup</button>
-          <p className='mt-3'>Already have an account <Link to={'/login'}>Login Now</Link></p>
+          <p className='mt-3'>Already have an account? <Link to="/login">Login Now</Link></p>
         </form>
       </div>
     </section>

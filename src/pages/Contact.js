@@ -1,20 +1,30 @@
 // pages/ContactUs.js
 import React, { useState } from 'react';
+import axios from 'axios';
 import bg from '../assets/bg.jpg';
 
-const Contact = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+const ContactUs = () => {
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can add backend submission logic here
-    console.log('Message sent:', form);
-    alert('Thank you for contacting us!');
-    setForm({ name: '', email: '', message: '' });
+    try {
+      await axios.post('http://localhost:5001/api/contact', form);
+      alert('✅ Thank you for contacting us!');
+      setForm({ name: '', email: '', phone: '', message: '' });
+    } catch (err) {
+      console.error(err);
+      alert('❌ Failed to send message. Please try again.');
+    }
   };
 
   return (
@@ -54,6 +64,18 @@ const Contact = () => {
               required
             />
           </div>
+          <div className="mb-3">
+            <label htmlFor="phone" className="form-label">Phone Number</label>
+            <input
+              type="tel"
+              name="phone"
+              className="form-control"
+              id="phone"
+              placeholder="03xx-xxxxxxx"
+              value={form.phone}
+              onChange={handleChange}
+            />
+          </div>
           <div className="mb-4">
             <label htmlFor="message" className="form-label">Message</label>
             <textarea
@@ -74,4 +96,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactUs;

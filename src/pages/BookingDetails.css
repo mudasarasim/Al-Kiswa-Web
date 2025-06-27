@@ -1,0 +1,106 @@
+.booking-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.4s ease-in;
+}
+
+.booking-container h3 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.booking-summary {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e0e0e0;
+}
+
+.booking-summary p {
+  margin: 0.5rem 0;
+  font-size: 15px;
+}
+
+.baggage-section,
+.payment-section {
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #ffc107;
+}
+
+.baggage-section h6,
+.payment-section h6 {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.baggage-section p,
+.payment-section p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+button.proceed-btn {
+  background-color: #ffc107;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: 0.3s ease;
+}
+
+button.proceed-btn:hover {
+  background-color: #e0a800;
+}
+
+button.back-btn {
+  background-color: transparent;
+  color: #555;
+  border: 1px solid #ccc;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+button.back-btn:hover {
+  background-color: #f2f2f2;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 0;
+  font-size: 18px;
+  color: #555;
+}
+
+/* Optional fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

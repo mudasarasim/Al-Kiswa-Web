@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import mm from '../assets/mm.png';
 import bg from '../assets/bg.jpg';
 import burj from '../assets/burj.png';
@@ -7,29 +8,55 @@ import wild from '../assets/wild.png';
 import at from '../assets/at.png';
 
 const Visa = () => {
-  const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(1);
+  const [visaForm, setVisaForm] = useState({
+  destination: '',
+  visa_type: '',
+  country_of_residence: '',
+  nationality: '',
+  arrival_date: '',
+  adults: 1,
+  children: 0,
+  processing_time: '',
+  price: '',
+  requirements: ''
+});
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setVisaForm({ ...visaForm, [name]: value });
+  };
 
   const increment = (type) => {
-    if (type === 'adult') setAdults(adults + 1);
-    if (type === 'child') setChildren(children + 1);
+    if (type === 'adult') setVisaForm({ ...visaForm, adults: visaForm.adults + 1 });
+    if (type === 'child') setVisaForm({ ...visaForm, children: visaForm.children + 1 });
   };
 
   const decrement = (type) => {
-    if (type === 'adult' && adults > 0) setAdults(adults - 1);
-    if (type === 'child' && children > 0) setChildren(children - 1);
+    if (type === 'adult' && visaForm.adults > 0) setVisaForm({ ...visaForm, adults: visaForm.adults - 1 });
+    if (type === 'child' && visaForm.children > 0) setVisaForm({ ...visaForm, children: visaForm.children - 1 });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('http://localhost:5001/api/visas', visaForm);
+      if (res.data.success) {
+        alert('Visa request submitted successfully!');
+        navigate('/getvisa');
+      } else {
+        alert('Visa submission failed.');
+      }
+    } catch (error) {
+      console.error('Submission Error:', error);
+      alert('Error submitting visa request');
+    }
   };
 
   return (
     <>
-      {/* Visa Form Section */}
-      <section
-        className="hero"
-        style={{
-          background: `url(${bg}) no-repeat center/cover`,
-          padding: '80px 20px',
-        }}
-      >
+      <section className="hero" style={{ background: `url(${bg}) no-repeat center/cover`, padding: '80px 20px' }}>
         <div className="container bg-white bg-opacity-75 p-4 rounded shadow-sm">
           <ul className="nav nav-tabs mb-4 border-warning border-bottom">
             <li className="nav-item"><Link to="/" className="nav-link">FLIGHT</Link></li>
@@ -38,37 +65,37 @@ const Visa = () => {
             <li className="nav-item"><Link className="nav-link">UMRAH</Link></li>
           </ul>
 
-          <form className="row g-3">
+          <form className="row g-3" onSubmit={handleSubmit}>
             <div className="col-md-4">
               <label className="fw-bold">Destination</label>
-              <input type="text" className="form-control" placeholder="Enter Country Name" />
+              <input type="text" className="form-control" name="destination" value={visaForm.destination} onChange={handleChange} required />
             </div>
             <div className="col-md-4">
               <label className="fw-bold">Country Of Residence</label>
-              <input type="text" className="form-control" placeholder="Enter Country Name" />
+              <input type="text" className="form-control" name="country_of_residence" value={visaForm.country_of_residence} onChange={handleChange} required />
             </div>
             <div className="col-md-4">
               <label className="fw-bold">Nationality</label>
-              <input type="text" className="form-control" placeholder="Enter Country Name" />
+              <input type="text" className="form-control" name="nationality" value={visaForm.nationality} onChange={handleChange} required />
             </div>
             <div className="col-md-4">
               <label className="fw-bold">Visa Type</label>
-              <select className="form-select">
-                <option>Select Visa Type</option>
-                <option>Tourist</option>
-                <option>Business</option>
-                <option>Transit</option>
+              <select className="form-select" name="visa_type" value={visaForm.visa_type} onChange={handleChange} required>
+                <option value="">Select Visa Type</option>
+                <option value="Tourist">Tourist</option>
+                <option value="Business">Business</option>
+                <option value="Transit">Transit</option>
               </select>
             </div>
             <div className="col-md-4">
               <label className="fw-bold">Arrival Date</label>
-              <input type="date" className="form-control" />
+              <input type="date" className="form-control" name="arrival_date" value={visaForm.arrival_date} onChange={handleChange} required />
             </div>
             <div className="col-md-2">
               <label className="fw-bold">Adult(s)</label>
               <div className="d-flex align-items-center">
                 <button type="button" className="btn btn-warning px-3" onClick={() => decrement('adult')}>-</button>
-                <input type="text" className="form-control text-center mx-1" value={adults} readOnly />
+                <input type="text" className="form-control text-center mx-1" value={visaForm.adults} readOnly />
                 <button type="button" className="btn btn-warning px-3" onClick={() => increment('adult')}>+</button>
               </div>
             </div>
@@ -76,7 +103,7 @@ const Visa = () => {
               <label className="fw-bold">Child (Below 12 Years)</label>
               <div className="d-flex align-items-center">
                 <button type="button" className="btn btn-warning px-3" onClick={() => decrement('child')}>-</button>
-                <input type="text" className="form-control text-center mx-1" value={children} readOnly />
+                <input type="text" className="form-control text-center mx-1" value={visaForm.children} readOnly />
                 <button type="button" className="btn btn-warning px-3" onClick={() => increment('child')}>+</button>
               </div>
             </div>

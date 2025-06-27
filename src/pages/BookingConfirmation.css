@@ -1,0 +1,117 @@
+/* BookingConfirmation.css */
+
+.booking-wrapper {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f6f6f6;
+}
+
+.left-section, .right-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  flex: 1;
+}
+
+.right-section {
+  max-width: 320px;
+}
+
+.section-box {
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.section-box h5 {
+  background: #ff8c00;
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.flight-block {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.form-section h6 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.form-row-2, .form-row-3, .form-row-5 {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.form-row-2 input, .form-row-3 input,
+.form-row-5 input, .form-row-2 select,
+.form-row-3 select, .form-row-5 select {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.baggage-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.baggage-box {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #f8f8f8;
+  width: 100px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.baggage-box.selected {
+  background-color: #fffae6;
+  border: 2px solid orange;
+}
+
+.btn-book {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-book:hover {
+  background-color: #218838;
+}
+
+.fare-box p {
+  margin: 6px 0;
+}
+
+.fare-box hr {
+  margin: 10px 0;
+  border-color: #ccc;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.text-warning {
+  color: #ff8c00;
+}

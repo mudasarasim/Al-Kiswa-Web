@@ -1,0 +1,53 @@
+.card h5 {
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 0.9rem;
+}
+
+.card .btn {
+  border-radius: 20px;
+  padding: 6px 16px;
+}
+
+.flight-card {
+  border-radius: 10px;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.flight-card .btn-sm {
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 13px;
+}
+.flight-drawer-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 1050;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flight-drawer {
+  background: white;
+  width: 350px;
+  height: 100%;
+  padding: 20px;
+  box-shadow: -2px 0 6px rgba(0,0,0,0.1);
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
