@@ -84,7 +84,7 @@ const Home = () => {
                 <option value="BUSINESS">Business</option>
               </select>
             </div>
-            <div className="col-md-1">
+            <div className="col-md-2">
               <label className="form-label fw-bold">Passenger</label>
               <select name="adults" className="form-select" onChange={handleChange}>
                 <option value="1">1</option>
