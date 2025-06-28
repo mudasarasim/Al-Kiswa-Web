@@ -56,7 +56,7 @@ const Home = () => {
               <Link to={'/visa'} className="nav-link">Visa</Link>
             </li>
             <li className="nav-item">
-              <Link to={'#'} className="nav-link">Tour</Link>
+              <Link to={'/Umrah'} className="nav-link">Umrah</Link>
             </li>
           </ul>
 

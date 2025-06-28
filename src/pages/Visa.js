@@ -62,7 +62,7 @@ const Visa = () => {
             <li className="nav-item"><Link to="/" className="nav-link">FLIGHT</Link></li>
             <li className="nav-item"><Link to="/hotel" className="nav-link">HOTEL</Link></li>
             <li className="nav-item"><Link to="/visa" className="nav-link active text-warning">VISA</Link></li>
-            <li className="nav-item"><Link className="nav-link">UMRAH</Link></li>
+            <li className="nav-item"><Link to={"/Umrah"} className="nav-link">UMRAH</Link></li>
           </ul>
 
           <form className="row g-3" onSubmit={handleSubmit}>

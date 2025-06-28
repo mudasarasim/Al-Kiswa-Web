@@ -13,7 +13,7 @@ import GetVisa from "./pages/GetVisa";
 import Flights from "./pages/Flights";
 import BookingDetails from "./pages/BookingDetails";
 import BookingConfirmation from "./pages/BookingConfirmation";
-import MyBooking from "./pages/MyBooking";
+import Umrah from "./pages/Umrah";
 import AdminDashboard from "./pages/AdminDashboard";
 import AddTour from "./pages/AddTour";
 import ViewTours from "./pages/ViewTours";
@@ -38,7 +38,7 @@ function App() {
            <Route path="/Flights" element={<Flights />} />
            <Route path="/BookingDetails" element={<BookingDetails/>} />
            <Route path="/BookingConfirmation" element={<BookingConfirmation/>} />
-           <Route path="/MyBooking" element={<MyBooking/>} />
+           <Route path="/Umrah" element={<Umrah/>} />
            <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/add-tour" element={<AddTour />} />
         <Route path="/admin/view-tours" element={<ViewTours />} />

@@ -44,7 +44,7 @@ const Navbar = () => {
               { path: '/hotel', label: 'Hotel' },
               { path: '/visa', label: 'Visa' },
               { path: '/holidays', label: 'Holidays' },
-              { path: '/MyBooking', label: 'UMRAH' },
+              { path: '/Umrah', label: 'UMRAH' },
             ].map((link, i) => (
               <li className="nav-item" key={i}>
                 <NavLink

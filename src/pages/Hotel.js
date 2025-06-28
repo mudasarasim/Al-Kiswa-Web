@@ -15,7 +15,7 @@ const Hotel = () => (
                     <li class="nav-item"><Link to={'/'} class="nav-link" href="#">Flight</Link></li>
                     <li class="nav-item"><Link to={'/hotel'} class="nav-link active text-warning" href="#">Hotel</Link></li>
                     <li class="nav-item"><Link to={'/visa'} class="nav-link" href="#">Visa</Link></li>
-                    <li class="nav-item"><Link class="nav-link" href="#">Tour</Link></li>
+                    <li class="nav-item"><Link to={'/Umrah'}class="nav-link" href="#">Umrah</Link></li>
                 </ul>
                 <form className="row align-items-end g-3">
                     <div className="col-md-3">
