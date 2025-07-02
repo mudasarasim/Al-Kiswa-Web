@@ -21,8 +21,10 @@ const GetVisa = () => {
     nationality: '',
     city: '',
     address: '',
-    passport_copy: null,
+    passport_front: null,
+    passport_back: null,
     photograph: null,
+    nic: null,
     payment_method: '',
     terms_accepted: 0,
   });
@@ -54,15 +56,23 @@ const GetVisa = () => {
         if (
           value !== null &&
           value !== undefined &&
-          key !== 'passport_copy' &&
-          key !== 'photograph'
+          key !== 'passport_front' &&
+          key !== 'passport_back' &&
+          key !== 'photograph' &&
+          key !== 'nic'
         ) {
           data.append(key, value);
         }
       });
 
-      if (formData.passport_copy) {
-        data.append('passport_copy', formData.passport_copy);
+      if (formData.passport_front) {
+        data.append('passport_front', formData.passport_front);
+      }
+      if (formData.passport_back) {
+        data.append('passport_back', formData.passport_back);
+      }
+      if (formData.photograph) {
+        data.append('photograph', formData.photograph);
       }
       if (formData.photograph) {
         data.append('photograph', formData.photograph);
@@ -106,7 +116,8 @@ const GetVisa = () => {
         <div className="bg-white p-4 mb-4 rounded shadow">
           <h5 className="bg-primary text-white px-3 py-2 rounded">Required Documents:</h5>
           <ol className="mt-3 ps-4 text-muted">
-            <li>Passport Copy</li>
+            <li>Passport Front Page</li>
+            <li>Passport Back Page</li>
             <li>Passport Signature Page</li>
             <li>CNIC</li>
             <li>White Background Picture</li>
@@ -159,12 +170,20 @@ const GetVisa = () => {
 
           <div className="row mt-3">
             <div className="col-md-3">
-              <label>Passport Copy</label>
-              <input type="file" className="form-control" name="passport_copy" onChange={(e) => handleFileChange(e, 'passport_copy')} />
+              <label>Passport Front Page</label>
+              <input type="file" className="form-control" name="passport_front" onChange={(e) => handleFileChange(e, 'passport_front')} />
+            </div>
+            <div className="col-md-3">
+              <label>Passport Back Page</label>
+              <input type="file" className="form-control" name="passport_back" onChange={(e) => handleFileChange(e, 'passport_back')} />
             </div>
             <div className="col-md-3">
               <label>Photograph</label>
               <input type="file" className="form-control" name="photograph" onChange={(e) => handleFileChange(e, 'photograph')} />
+            </div>
+            <div className="col-md-3">
+              <label>NIC</label>
+              <input type="file" className="form-control" name="passport_front" onChange={(e) => handleFileChange(e, 'nic')} />
             </div>
           </div>
         </div>
