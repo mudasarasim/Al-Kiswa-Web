@@ -9,7 +9,7 @@ const Footer = () => (
         <div className="col-md-5">
           <img src="img/logo.png" height="160" className="mb-2 pl-5" alt="Logo" /><br />
           <p className='text-center' style={{ width: '290px' }}>
-            Alkiswa.com is an online travel platform managed by Delight Express Tourism LLC...
+           Alkiswa.com is a trusted online travel platform offering Umrah packages, seamless flight bookings, hotel reservations, and visa services — all in one place.
           </p>
         </div>
 
