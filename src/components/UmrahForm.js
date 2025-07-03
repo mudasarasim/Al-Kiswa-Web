@@ -24,6 +24,17 @@ const UmrahForm = () => {
     photo: null,
   });
 
+  const [adults, setAdults] = useState(1);
+  const [children, setChildren] = useState(0);
+
+  const handleAdultChange = (delta) => {
+    setAdults((prev) => Math.max(1, prev + delta));
+  };
+
+  const handleChildrenChange = (delta) => {
+    setChildren((prev) => Math.max(0, prev + delta));
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -56,29 +67,30 @@ const UmrahForm = () => {
         <div className="row g-3">
           {/* Email, Country Code, Phone */}
           <div className="col-md-4">
-            <label>Email</label>
+            <label className='fw-bold'>Email</label>
             <input type="email" name="email" className="form-control" onChange={handleChange} required />
           </div>
           <div className="col-md-4">
-            <label>Country Code</label>
+            <label className='fw-bold'>Country Code</label>
             <input type="text" name="countryCode" className="form-control" onChange={handleChange} required />
           </div>
           <div className="col-md-4">
-            <label>Phone</label>
+            <label className='fw-bold'>Phone</label>
             <input type="text" name="phone" className="form-control" onChange={handleChange} required />
           </div>
 
           {/* Title and Gender */}
           <div className="col-md-6">
-            <label>Title</label>
+            <label className='fw-bold'>Title</label>
             <select name="title" className="form-select" onChange={handleChange} required>
               <option value="">Select Title</option>
               <option value="Mr">Mr</option>
+              <option value="Mrs">Ms</option>
               <option value="Mrs">Mrs</option>
             </select>
           </div>
           <div className="col-md-6">
-            <label>Gender</label>
+            <label className='fw-bold'>Gender</label>
             <select name="gender" className="form-select" onChange={handleChange} required>
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
@@ -88,53 +100,103 @@ const UmrahForm = () => {
 
           {/* Name Fields */}
           <div className="col-md-6">
-            <label>First Name</label>
+            <label className='fw-bold'>First Name</label>
             <input type="text" name="firstName" className="form-control" onChange={handleChange} required />
           </div>
           <div className="col-md-6">
-            <label>Last Name</label>
+            <label className='fw-bold'>Last Name</label>
             <input type="text" name="lastName" className="form-control" onChange={handleChange} required />
           </div>
 
           {/* File Uploads */}
           <div className="col-md-6">
-            <label>Passport Front</label>
+            <label className='fw-bold'>Passport Front Side</label>
             <input type="file" name="passportFront" className="form-control" onChange={handleFileChange} required />
           </div>
           <div className="col-md-6">
-            <label>Passport Back</label>
+            <label className='fw-bold'>Passport Back Side</label>
             <input type="file" name="passportBack" className="form-control" onChange={handleFileChange} required />
           </div>
           <div className="col-md-6">
-            <label>Emirates ID</label>
+            <label className='fw-bold'>Emirates ID</label>
             <input type="file" name="emiratesId" className="form-control" onChange={handleFileChange} required />
           </div>
           <div className="col-md-6">
-            <label>Photo (White Background)</label>
+            <label className='fw-bold'>Photo (White Background)</label>
             <input type="file" name="photo" className="form-control" onChange={handleFileChange} required />
           </div>
 
           {/* Package & Numbers */}
           <div className="col-md-4">
-            <label>Package Type</label>
+            <label className='fw-bold' style={{margintop:"7px"}}>Package Type</label>
             <select name="packageType" className="form-select" onChange={handleChange} required>
               <option value="">Select Package</option>
               <option value="By Bus">By Bus</option>
               <option value="By Air">By Air</option>
             </select>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
+              <label className="form-label fw-bold">Adult(s)</label>
+              <div className="input-group">
+                <button
+                  className="btn btn-warning text-white"
+                  type="button"
+                  onClick={() => handleAdultChange(-1)}
+                >
+                  -
+                </button>
+                <input
+                  type="text"
+                  className="form-control text-center"
+                  value={adults}
+                  readOnly
+                />
+                <button
+                  className="btn btn-warning text-white"
+                  type="button"
+                  onClick={() => handleAdultChange(1)}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div className="col-md-3">
+              <label className="form-label fw-bold">Child(ren)</label>
+              <div className="input-group">
+                <button
+                  className="btn btn-warning text-white"
+                  type="button"
+                  onClick={() => handleChildrenChange(-1)}
+                >
+                  -
+                </button>
+                <input
+                  type="text"
+                  className="form-control text-center"
+                  value={children}
+                  readOnly
+                />
+                <button
+                  className="btn btn-warning text-white"
+                  type="button"
+                  onClick={() => handleChildrenChange(1)}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          {/* <div className="col-md-4">
             <label>Adults</label>
             <input type="number" name="adults" min="1" className="form-control" onChange={handleChange} required />
           </div>
           <div className="col-md-4">
             <label>Children</label>
             <input type="number" name="children" min="0" className="form-control" onChange={handleChange} />
-          </div>
+          </div> */}
 
           {/* Room Type */}
           <div className="col-md-12">
-            <label>Room Type</label>
+            <label className='fw-bold'>Room Type</label>
             <select name="roomType" className="form-select" onChange={handleChange} required>
               <option value="">Select Room Type</option>
               <option value="Single">Single</option>
@@ -145,7 +207,7 @@ const UmrahForm = () => {
 
           {/* Submit */}
           <div className="col-12 text-center mt-3">
-            <button type="submit" className="btn btn-primary px-5">Submit</button>
+            <button type="submit" className=" btn btn-warning px-5">Submit</button>
           </div>
         </div>
       </form>
