@@ -10,8 +10,6 @@ import { Link } from 'react-router-dom';
 
 const Holidays = () => (
   <>
-  
-
     <section className="py-5">
       <div className="container text-center">
         <h2 className="text-warning fw-bold">BEST OF THE HOLIDAY </h2>
