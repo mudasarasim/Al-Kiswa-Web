@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5001;
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '', // 🔒 update if needed
+  password: '',
   database: 'kiswa_database',
 });
 
@@ -23,7 +23,11 @@ db.connect((err) => {
 });
 
 // ✅ Middlewares
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
@@ -35,29 +39,41 @@ const flightRoutes = require('./routes/flights');
 const hotelPhotosRoute = require('./routes/hotelPhotos');
 const visaRoutes = require('./routes/visaRoutes');
 const visaTravelersRoute = require('./routes/visaTravelers')(db);
-const contactRoutes = require('./routes/contactRoutes');
+const contactRoutes = require('./routes/contactRoutes')(db);
+const umrahRoutes = require('./routes/umrahRoutes');
+const umrahAdminRoutes = require('./routes/admin/umrahAdmin');
 
-// ✅ Admin routes (functions requiring `db`)
+// ✅ Admin routes (with DB dependencies)
 const adminTourRoutes = require('./routes/admin/tours')(db);
 const adminMessageRoutes = require('./routes/admin/messages')(db);
 const adminVisaRoutes = require('./routes/admin/visaApplications')(db);
 
-// ✅ Public Routes
+// ✅ Admin auth/session routes
+const adminAuthRoutes = require('./routes/admin/adminAuth');
+const adminProtectedRoute = require('./routes/admin/protected');
+const adminCheckSessionRoute = require('./routes/admin/checkSession');
+
+// ✅ Public API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/packages', packageRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/flights', flightRoutes);
 app.use('/api/hotels', hotelPhotosRoute);
-app.use('/api/visas', visaRoutes(db)); // use only once
+app.use('/api/visas', visaRoutes(db));
 app.use('/api/travelers', visaTravelersRoute);
 app.use('/api/contact', contactRoutes);
+app.use('/api/umrah', umrahRoutes);
 
-// ✅ Admin Routes
-app.use('/api/admin/tours', adminTourRoutes);
+// ✅ Admin API Routes
+app.use('/api/admin', adminAuthRoutes);
+app.use('/api/admin', adminProtectedRoute);
+app.use('/api/admin', adminCheckSessionRoute);
 app.use('/api/admin/messages', adminMessageRoutes);
+app.use('/api/admin/tours', adminTourRoutes);
 app.use('/api/admin/visa-applications', adminVisaRoutes);
+app.use('/api/admin/umrah', umrahAdminRoutes); // ✅ Your required route
 
-// ✅ Start server
+// ✅ Start Server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
