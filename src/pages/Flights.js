@@ -90,8 +90,9 @@ const Flights = () => {
 
       <div className="row">
         {flights.map((flight, index) => {
-          const onward = flight.itineraries[0]?.segments[0];
-          const returnFlight = flight.itineraries[1]?.segments[0];
+          const onward = flight.itineraries?.[0]?.segments?.[0] || {};
+const returnFlight = flight.itineraries?.[1]?.segments?.[0] || {};
+
           const price = flight.price?.total;
           const currency = flight.price?.currency;
           const airline = flight?.validatingAirlineCodes?.join(', ') || 'Airline';
