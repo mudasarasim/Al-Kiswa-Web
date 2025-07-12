@@ -68,7 +68,7 @@ const GetVisa = () => {
         data.append('photograph', formData.photograph);
       }
 
-      await axios.post('http://localhost:5001/api/travelers', data, {
+      await axios.post('http://al-kiswa-backend-production.up.railway.app/api/travelers', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

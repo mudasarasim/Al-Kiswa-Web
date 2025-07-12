@@ -33,7 +33,7 @@ const Flights = () => {
     const fetchFlights = async () => {
       try {
         setLoading(true);
-        const res = await axios.get('http://localhost:5001/api/flights/search', {
+        const res = await axios.get('http://al-kiswa-backend-production.up.railway.app/api/flights/search', {
           params: {
             from,
             to,

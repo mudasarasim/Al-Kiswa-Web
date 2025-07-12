@@ -12,7 +12,7 @@ const AdminDashboard = () => {
     const checkSession = async () => {
       try {
         const token = localStorage.getItem('adminToken');
-        const res = await axios.get('http://localhost:5001/api/admin/check-session', {
+        const res = await axios.get('http://al-kiswa-backend-production.up.railway.app/api/admin/check-session', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
   }, [navigate]);
 
   const handleLogout = async () => {
-    await axios.get('http://localhost:5001/api/admin/logout');
+    await axios.get('http://al-kiswa-backend-production.up.railway.app/api/admin/logout');
     localStorage.removeItem('adminToken');
     navigate('/admin/AdminLogin');
   };

@@ -19,7 +19,7 @@ const AddTour = () => {
       data.append('description', form.description);
       if (form.image) data.append('image', form.image);
 
-      await axios.post('http://localhost:5001/api/admin/tours/add', data);
+      await axios.post('http://al-kiswa-backend-production.up.railway.app/api/admin/tours/add', data);
       alert('✅ Tour added!');
       setForm({ title: '', description: '', image: null });
     } catch (err) {

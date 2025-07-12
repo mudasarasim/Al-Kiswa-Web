@@ -9,7 +9,7 @@ const ProtectedAdminRoute = ({ children }) => {
     const checkAuth = async () => {
       try {
         const token = localStorage.getItem('adminToken');
-        const res = await axios.get('http://localhost:5001/api/admin/protected', {
+        const res = await axios.get('http://al-kiswa-backend-production.up.railway.app/api/admin/protected', {
           headers: {
             Authorization: `Bearer ${token}`
           }

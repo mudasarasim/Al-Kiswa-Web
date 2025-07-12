@@ -11,7 +11,7 @@ const AdminUmrahList = () => {
 
   const fetchUmrahData = async () => {
     try {
-      const res = await axios.get('http://localhost:5001/api/admin/umrah/all');
+      const res = await axios.get('http://al-kiswa-backend-production.up.railway.app/api/admin/umrah/all');
       setApplications(res.data);
     } catch (err) {
       console.error('Error fetching Umrah data:', err);
@@ -24,12 +24,12 @@ const AdminUmrahList = () => {
     if (!filename) return 'N/A';
     return (
       <a
-        href={`http://localhost:5001/uploads/umrah/${filename}`}
+        href={`http://al-kiswa-backend-production.up.railway.app/uploads/umrah/${filename}`}
         target="_blank"
         rel="noopener noreferrer"
       >
         <img
-          src={`http://localhost:5001/uploads/umrah/${filename}`}
+          src={`http://al-kiswa-backend-production.up.railway.app/uploads/umrah/${filename}`}
           alt={alt}
           style={{
             width: '60px',

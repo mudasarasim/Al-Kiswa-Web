@@ -20,7 +20,7 @@ const Signup = () => {
     setSuccess('');
 
     try {
-      await axios.post('http://localhost:5001/api/auth/register', {
+      await axios.post('http://al-kiswa-backend-production.up.railway.app/api/auth/register', {
         ...form,
         role: 'user'
       });

@@ -41,7 +41,7 @@ const Visa = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5001/api/visas', visaForm);
+      const res = await axios.post('http://al-kiswa-backend-production.up.railway.app/api/visas', visaForm);
       if (res.data.success) {
         alert('Visa request submitted successfully!');
         navigate('/getvisa');

@@ -52,7 +52,7 @@ const UmrahForm = () => {
     Object.entries(files).forEach(([key, file]) => form.append(key, file));
 
     try {
-      await axios.post('http://localhost:5001/api/umrah/submit', form);
+      await axios.post('http://al-kiswa-backend-production.up.railway.app/api/umrah/submit', form);
       alert('Form submitted successfully!');
     } catch (err) {
       console.error('Submission error:', err);

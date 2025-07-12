@@ -5,7 +5,7 @@ const AdminMessages = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/contact/all')
+    axios.get('http://al-kiswa-backend-production.up.railway.app/api/contact/all')
       .then((res) => setMessages(res.data))
       .catch((err) => console.error(err));
   }, []);

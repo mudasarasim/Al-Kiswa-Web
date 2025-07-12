@@ -9,7 +9,7 @@ const ContactMessages = () => {
     const fetchMessages = async () => {
       try {
         const token = localStorage.getItem('adminToken');
-        const res = await axios.get('http://localhost:5001/api/admin/messages', {
+        const res = await axios.get('http://al-kiswa-backend-production.up.railway.app/api/admin/messages', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -26,7 +26,7 @@ const AddTour = () => {
     });
 
     try {
-      await axios.post('http://localhost:5001/api/admin/tours/add', data);
+      await axios.post('http://al-kiswa-backend-production.up.railway.app/api/admin/tours/add', data);
       alert('✅ Tour added!');
     } catch (err) {
       console.error(err);

@@ -5,14 +5,14 @@ const ViewTours = () => {
   const [tours, setTours] = useState([]);
 
   const fetchTours = async () => {
-    const res = await axios.get('http://localhost:5001/api/admin/tours/all');
+    const res = await axios.get('http://al-kiswa-backend-production.up.railway.app/api/admin/tours/all');
     setTours(res.data);
   };
 
   const handleDelete = async (id) => {
   if (window.confirm('Are you sure to delete this tour?')) {
     try {
-      await axios.delete(`http://localhost:5001/api/admin/tours/${id}`);
+      await axios.delete(`http://al-kiswa-backend-production.up.railway.app/api/admin/tours/${id}`);
       alert('✅ Tour deleted successfully!');
       fetchTours(); // refresh list
     } catch (err) {
@@ -40,7 +40,7 @@ const ViewTours = () => {
         {tours.map((tour) => (
           <div className="col-md-4 mb-3" key={tour.id}>
             <div className="card">
-              <img src={`http://localhost:5001/uploads/${tour.image}`} alt={tour.title} className="card-img-top" />
+              <img src={`http://al-kiswa-backend-production.up.railway.app/uploads/${tour.image}`} alt={tour.title} className="card-img-top" />
               <div className="card-body">
                 <h5>{tour.title}</h5>
                 <p>{tour.description}</p>

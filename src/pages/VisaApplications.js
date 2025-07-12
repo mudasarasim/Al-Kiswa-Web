@@ -5,7 +5,7 @@ const VisaApplications = () => {
   const [applications, setApplications] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/admin/visa-applications')
+    axios.get('http://al-kiswa-backend-production.up.railway.app/api/admin/visa-applications')
       .then((res) => setApplications(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -47,12 +47,12 @@ const VisaApplications = () => {
                 <td>{app.profession}</td>
                 <td>{app.address}</td>
                 <td>
-                  <a href={`http://localhost:5001/uploads/${app.passport_copy}`} target="_blank" rel="noreferrer">
+                  <a href={`http://al-kiswa-backend-production.up.railway.app/uploads/${app.passport_copy}`} target="_blank" rel="noreferrer">
                     View
                   </a>
                 </td>
                 <td>
-                  <a href={`http://localhost:5001/uploads/${app.photograph}`} target="_blank" rel="noreferrer">
+                  <a href={`http://al-kiswa-backend-production.up.railway.app/${app.photograph}`} target="_blank" rel="noreferrer">
                     View
                   </a>
                 </td>
