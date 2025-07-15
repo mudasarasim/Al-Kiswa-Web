@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { getNames } from 'country-list';
 import axios from 'axios';
 import mm from '../assets/mm.png';
 import bg from '../assets/bg.jpg';
@@ -9,17 +10,19 @@ import at from '../assets/at.png';
 
 const Visa = () => {
   const [visaForm, setVisaForm] = useState({
-  destination: '',
-  visa_type: '',
-  country_of_residence: '',
-  nationality: '',
-  arrival_date: '',
-  adults: 1,
-  children: 0,
-  processing_time: '',
-  price: '',
-  requirements: ''
-});
+    destination: '',
+    visa_type: '',
+    country_of_residence: '',
+    nationality: '',
+    arrival_date: '',
+    adults: 1,
+    children: 0,
+    processing_time: '',
+    price: '',
+    requirements: ''
+  });
+
+  const countryNames = getNames();
 
   const navigate = useNavigate();
 
@@ -41,7 +44,7 @@ const Visa = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://al-kiswa-backend-production.up.railway.app/api/visas', visaForm);
+      const res = await axios.post('http://localhost:5001/api/visas', visaForm);
       if (res.data.success) {
         alert('Visa request submitted successfully!');
         navigate('/getvisa');
@@ -66,18 +69,39 @@ const Visa = () => {
           </ul>
 
           <form className="row g-3" onSubmit={handleSubmit}>
+            {/* Destination */}
             <div className="col-md-4">
               <label className="fw-bold">Destination</label>
-              <input type="text" className="form-control" name="destination" value={visaForm.destination} onChange={handleChange} required />
+              <select className="form-select" name="destination" value={visaForm.destination} onChange={handleChange} required>
+                <option value="">Select Destination</option>
+                {countryNames.map((country, i) => (
+                  <option key={i} value={country}>{country}</option>
+                ))}
+              </select>
             </div>
+              
+            {/* Country of Residence */}
             <div className="col-md-4">
               <label className="fw-bold">Country Of Residence</label>
-              <input type="text" className="form-control" name="country_of_residence" value={visaForm.country_of_residence} onChange={handleChange} required />
+              <select className="form-select" name="country_of_residence" value={visaForm.country_of_residence} onChange={handleChange} required>
+                <option value="">Select Country</option>
+                {countryNames.map((country, i) => (
+                  <option key={i} value={country}>{country}</option>
+                ))}
+              </select>
             </div>
+              
+            {/* Nationality */}
             <div className="col-md-4">
               <label className="fw-bold">Nationality</label>
-              <input type="text" className="form-control" name="nationality" value={visaForm.nationality} onChange={handleChange} required />
+              <select className="form-select" name="nationality" value={visaForm.nationality} onChange={handleChange} required>
+                <option value="">Select Nationality</option>
+                {countryNames.map((country, i) => (
+                  <option key={i} value={country}>{country}</option>
+                ))}
+              </select>
             </div>
+
             <div className="col-md-4">
               <label className="fw-bold">Visa Type</label>
               <select className="form-select" name="visa_type" value={visaForm.visa_type} onChange={handleChange} required>
