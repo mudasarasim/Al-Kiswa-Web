@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { customList } from 'country-codes-list';
+import { getNames } from 'country-list';
 
 const GetVisa = () => {
   const [formData, setFormData] = useState({
@@ -46,6 +48,15 @@ const GetVisa = () => {
     }));
   };
 
+  const countryOptions = Object.entries(
+    customList('countryCode', '{countryNameEn} (+{countryCallingCode})')
+    ).map(([key, label]) => ({
+    value: key,
+    label,
+  }));
+
+  const countryNames = getNames();
+
   const handleSubmit = async () => {
     try {
       const data = new FormData();
@@ -68,7 +79,7 @@ const GetVisa = () => {
         data.append('photograph', formData.photograph);
       }
 
-      await axios.post('http://al-kiswa-backend-production.up.railway.app/api/travelers', data, {
+      await axios.post('http://localhost:5001/api/travelers', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -122,16 +133,61 @@ const GetVisa = () => {
 
           <div className="bg-warning bg-opacity-75 text-dark fw-bold px-3 py-2 mt-3 rounded">Contact Details</div>
           <div className="row mt-3">
-            <div className="col-md-4"><label>Email</label><input className="form-control" name="email" value={formData.email} onChange={handleChange} /></div>
-            <div className="col-md-4"><label>Country Code</label><input className="form-control" name="country_code" value={formData.country_code} onChange={handleChange} /></div>
+            <div className="col-md-4">
+              <label>Email</label>
+              <input className="form-control" name="email" 
+                value={formData.email} 
+                onChange={handleChange} />
+            </div>
+            <div className="col-md-4">
+              <label className="fw-bold">Country Code</label>
+              <select
+                className="form-select"
+                name="country_code"
+                value={formData.country_code}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Country Code</option>
+                {countryOptions.map(({ value, label }) => (
+                  <option key={value} value={label.match(/\+[\d]+/)[0]}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="col-md-4"><label>Phone</label><input className="form-control" name="phone" value={formData.phone} onChange={handleChange} /></div>
           </div>
 
           <div className="bg-warning bg-opacity-75 text-dark fw-bold px-3 py-2 mt-4 rounded">Adult 1 ( Lead Traveller )</div>
           <div className="row mt-3">
-            <div className="col-md-2"><label>Title</label><input className="form-control" name="title" value={formData.title} onChange={handleChange} /></div>
-            <div className="col-md-2"><label>Gender</label><input className="form-control" name="gender" value={formData.gender} onChange={handleChange} /></div>
-            <div className="col-md-2"><label>First Name</label><input className="form-control" name="first_name" value={formData.first_name} onChange={handleChange} /></div>
+            <div className="col-md-3">
+              <label className='fw-bold'>Title</label>
+              <select name="titlel" className="form-select" onChange={handleChange} required>
+                <option value="">Select Title</option>
+                <option value="Mr">Mr.</option>
+                <option value="Ms.">Ms.</option>
+                <option value="Mrs.">Mrs.</option>
+                <option value="Dr.">Dr.</option>
+              </select>
+            </div>
+            
+            <div className="col-md-3">
+              <label className='fw-bold'>Gender</label>
+              <select name="gender" className="form-select" onChange={handleChange} required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div className="col-md-2">
+              <label>First Name</label>
+              <input className="form-control" 
+                name="first_name" 
+                value={formData.first_name} 
+                onChange={handleChange} />
+            </div>
+            
             <div className="col-md-2"><label>Middle Name</label><input className="form-control" name="middle_name" value={formData.middle_name} onChange={handleChange} /></div>
             <div className="col-md-2"><label>Last Name</label><input className="form-control" name="last_name" value={formData.last_name} onChange={handleChange} /></div>
           </div>
@@ -152,7 +208,23 @@ const GetVisa = () => {
           <div className="bg-secondary text-white fw-bold px-3 py-2 mt-4 rounded">Passport Details</div>
           <div className="row mt-3">
             <div className="col-md-3"><label>Passport Number</label><input className="form-control" name="passport_number" value={formData.passport_number} onChange={handleChange} /></div>
-            <div className="col-md-3"><label>Nationality</label><input className="form-control" name="nationality" value={formData.nationality} onChange={handleChange} /></div>
+            <div className="col-md-3">
+              <label className="fw-bold">Nationality</label>
+              <select
+                className="form-select"
+                name="nationality"
+                value={formData.nationality}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Nationality</option>
+                {countryNames.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="col-md-3"><label>City</label><input className="form-control" name="city" value={formData.city} onChange={handleChange} /></div>
             <div className="col-md-3"><label>Address</label><input className="form-control" name="address" value={formData.address} onChange={handleChange} /></div>
           </div>
