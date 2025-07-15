@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { customList } from 'country-codes-list';
 
 const UmrahForm = () => {
   const [formData, setFormData] = useState({
@@ -52,13 +53,20 @@ const UmrahForm = () => {
     Object.entries(files).forEach(([key, file]) => form.append(key, file));
 
     try {
-      await axios.post('http://al-kiswa-backend-production.up.railway.app/api/umrah/submit', form);
+      await axios.post('http://localhost:5001/api/umrah/submit', form);
       alert('Form submitted successfully!');
     } catch (err) {
       console.error('Submission error:', err);
       alert('Submission failed.');
     }
   };
+
+  const countryOptions = Object.entries(
+    customList('countryCode', '{countryNameEn} (+{countryCallingCode})')
+    ).map(([key, label]) => ({
+    value: key,
+    label,
+  }));
 
   return (
     <div className="container py-5">
@@ -72,7 +80,20 @@ const UmrahForm = () => {
           </div>
           <div className="col-md-4">
             <label className='fw-bold'>Country Code</label>
-            <input type="text" name="countryCode" className="form-control" onChange={handleChange} required />
+            <select
+              name="countryCode"
+              className="form-select"
+              value={formData.countryCode}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Country</option>
+              {countryOptions.map((country) => (
+                <option key={country.value} value={`+${country.value}`}>
+                  {country.label}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="col-md-4">
             <label className='fw-bold'>Phone</label>
@@ -216,3 +237,4 @@ const UmrahForm = () => {
 };
 
 export default UmrahForm;
+a
